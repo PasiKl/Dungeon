@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        speed = 20.0f;
+        speed = 6.0f;
 
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -31,19 +31,27 @@ public class PlayerController : MonoBehaviour
         state = "idle";
     }
 
+    void FixedUpdate() 
+    {
+        float x, y;
+
+        x = Math.Sign(h) * speed * Time.deltaTime;
+        y = Math.Sign(v) * speed * Time.deltaTime;
+
+        rb.MovePosition(transform.position + new Vector3(x, y, 0));
+    }
+
     // Update is called once per frame
     void Update()
     {
         bool move;
-        float x, y;
+        // float x, y;
 
         move = CheckInput();
 
         switch(state)
         {
             case "idle":
-                // move = CheckInput();
- 
                 if(move)
                 {
                     anim.Play("PlayerWalk");
@@ -60,16 +68,15 @@ public class PlayerController : MonoBehaviour
                 
                     state = "idle";
                 }
-                // else
-                //     Flip(h);
 
                 break;
         }
 
-        x = Math.Sign(h) * speed * Time.deltaTime;
-        y = Math.Sign(v) * speed * Time.deltaTime;
+        // x = Math.Sign(h) * speed * Time.deltaTime;
+        // y = Math.Sign(v) * speed * Time.deltaTime;
 
-        rb.MovePosition(transform.position + new Vector3(x, y, 0));
+        // rb.MovePosition(transform.position + new Vector3(x, y, 0));
+    
     }
 
     private void OnCollisionEnter2D(Collision2D other) 
