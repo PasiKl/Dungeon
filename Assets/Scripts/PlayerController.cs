@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
 
     string state;
 
+    [SerializeField] GameObject attackSprite;
+
     Animator anim;
     Rigidbody2D rb;
     SpriteRenderer rend;
@@ -70,13 +72,11 @@ public class PlayerController : MonoBehaviour
                 }
 
                 break;
+
+            case "attack":
+
+                break;
         }
-
-        // x = Math.Sign(h) * speed * Time.deltaTime;
-        // y = Math.Sign(v) * speed * Time.deltaTime;
-
-        // rb.MovePosition(transform.position + new Vector3(x, y, 0));
-    
     }
 
     private void OnCollisionEnter2D(Collision2D other) 
@@ -88,6 +88,12 @@ public class PlayerController : MonoBehaviour
     {
         h = Input.GetAxis("Horizontal");        
         v = Input.GetAxis("Vertical");
+
+        // if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetButtonDown("Fire1"))
+            Instantiate(attackSprite);
+            // Debug.Log("attack");
+            // state = "attack";
 
         if(h != 0)
         {
@@ -110,6 +116,11 @@ public class PlayerController : MonoBehaviour
             flip = false;
 
         rend.flipX = flip;
+    }
+
+    public bool GetFlip()
+    {
+        return flip;
     }
 }
 
