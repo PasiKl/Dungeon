@@ -49,7 +49,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         bool move;
-        // float x, y;
 
         move = CheckInput();
 
@@ -74,10 +73,6 @@ public class PlayerController : MonoBehaviour
                 }
 
                 break;
-
-            // case "attack":
-
-            //     break;
         }
     }
 
@@ -96,11 +91,8 @@ public class PlayerController : MonoBehaviour
         h = Input.GetAxis("Horizontal");        
         v = Input.GetAxis("Vertical");
 
-        // if(Input.GetKeyDown(KeyCode.Space))
         if(Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space))
             Instantiate(attackSprite);
-            // Debug.Log("attack");
-            // state = "attack";
 
         if(h != 0)
         {

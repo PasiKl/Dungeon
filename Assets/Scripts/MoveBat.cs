@@ -35,8 +35,6 @@ public class MoveBat : MonoBehaviour
         setter.target = dest.transform;
 
         player = GameObject.Find("Player");
-
-        // Debug.Log(effect);
     }
 
     // Update is called once per frame
@@ -44,7 +42,7 @@ public class MoveBat : MonoBehaviour
     {
         time -= Time.deltaTime;
 
-        if(Vector3.Distance(transform.position, player.transform.position) < 4.0f)
+        if(player != null && Vector3.Distance(transform.position, player.transform.position) < 4.0f)
             setter.target = player.transform;
         else if(time < 0.0f)
         {
@@ -68,11 +66,7 @@ public class MoveBat : MonoBehaviour
     {
         if(other.gameObject.tag == "WaveTag")
         {
-            // Debug.Log("Destroyed");
-        
             Destroy(gameObject);
-
-            // Debug.Log(effect);
 
             Instantiate(effect, gameObject.transform.position, Quaternion.identity);
         }
