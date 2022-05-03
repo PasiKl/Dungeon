@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     string state;
 
     [SerializeField] GameObject attackSprite;
+    [SerializeField] GameObject killedSprite;
 
     Animator anim;
     Rigidbody2D rb;
@@ -82,7 +83,12 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other) 
     {
-        // Debug.Log("hit");
+        if(other.gameObject.tag == "Enemy")
+        {
+            Instantiate(killedSprite, gameObject.transform.position, Quaternion.identity);
+        
+            Destroy(gameObject);
+        }
     }
 
     bool CheckInput()
@@ -91,7 +97,7 @@ public class PlayerController : MonoBehaviour
         v = Input.GetAxis("Vertical");
 
         // if(Input.GetKeyDown(KeyCode.Space))
-        if(Input.GetButtonDown("Fire1"))
+        if(Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space))
             Instantiate(attackSprite);
             // Debug.Log("attack");
             // state = "attack";

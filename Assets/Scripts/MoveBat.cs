@@ -9,6 +9,8 @@ public class MoveBat : MonoBehaviour
 {
     float time, resetTime;
 
+    Vector3 pos;
+
     GameObject dest;
     GameObject player;
 
@@ -26,7 +28,9 @@ public class MoveBat : MonoBehaviour
 
         dest = new GameObject();
 
-        dest.transform.position = new Vector3(transform.position.x + 1.0f, transform.position.y + 1.0f, 0.0f);
+        // dest.transform.position = new Vector3(transform.position.x + 1.0f, transform.position.y + 1.0f, 0.0f);
+        pos = new Vector3(transform.position.x + 1.0f, transform.position.y + 1.0f, 0.0f);
+        dest.transform.position = pos;
 
         setter.target = dest.transform;
 
@@ -50,8 +54,10 @@ public class MoveBat : MonoBehaviour
             float y = Random.value;
             y = Random.value < 0.5f ? y : -y;
                         
-            dest.transform.position = new Vector3(transform.position.x + x, transform.position.y + y, 0.0f);
-
+            // dest.transform.position = new Vector3(transform.position.x + x, transform.position.y + y, 0.0f);
+            pos.Set(transform.position.x + x, transform.position.y + y, 0.0f);
+            dest.transform.position = pos;
+            
             setter.target = dest.transform;
         
             time = resetTime;

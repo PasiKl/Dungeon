@@ -20601,7 +20601,7 @@ GameObject:
   - component: {fileID: 1059369830}
   m_Layer: 7
   m_Name: Bat
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20936,6 +20936,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackSprite: {fileID: 6758120109433302607, guid: ecf6b47acd614cb42bf8722b5ab8f75d, type: 3}
+  killedSprite: {fileID: 6202484571763851565, guid: d86e744684c4a524385a715ef8b69b2c, type: 3}
 --- !u!61 &1508460316
 BoxCollider2D:
   m_ObjectHideFlags: 0
