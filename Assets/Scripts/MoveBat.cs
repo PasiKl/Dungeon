@@ -66,9 +66,9 @@ public class MoveBat : MonoBehaviour
     {
         if(other.gameObject.tag == "WaveTag")
         {
-            Destroy(gameObject);
-
             Instantiate(effect, gameObject.transform.position, Quaternion.identity);
+
+            Destroy(gameObject);
         }
     }
 }
