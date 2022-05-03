@@ -1,6 +1,8 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 
 public class WaveScript : MonoBehaviour
 {
@@ -31,8 +33,9 @@ public class WaveScript : MonoBehaviour
         transform.position = player.transform.position + new Vector3(x, 0f, 0f);
     }
 
-    void OnCollisionEnter2D(Collision2D other) 
-    {
-        Debug.Log(other.gameObject.name);    
-    }
+    // void OnCollisionEnter2D(Collision2D other) 
+    // {
+    //     Debug.Log("attack");    
+    //     Debug.Log(other.gameObject.name);    
+    // }
 }

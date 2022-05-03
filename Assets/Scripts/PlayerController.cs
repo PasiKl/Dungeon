@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerController : MonoBehaviour
 {
     float speed, h, v;
@@ -73,15 +74,15 @@ public class PlayerController : MonoBehaviour
 
                 break;
 
-            case "attack":
+            // case "attack":
 
-                break;
+            //     break;
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other) 
+    void OnCollisionEnter2D(Collision2D other) 
     {
-        Debug.Log("hit");
+        // Debug.Log("hit");
     }
 
     bool CheckInput()

@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using Pathfinding;
@@ -10,6 +11,8 @@ public class MoveBat : MonoBehaviour
 
     GameObject dest;
     GameObject player;
+
+    [SerializeField] GameObject effect;
 
     AIDestinationSetter setter;
 
@@ -28,6 +31,8 @@ public class MoveBat : MonoBehaviour
         setter.target = dest.transform;
 
         player = GameObject.Find("Player");
+
+        // Debug.Log(effect);
     }
 
     // Update is called once per frame
@@ -50,6 +55,20 @@ public class MoveBat : MonoBehaviour
             setter.target = dest.transform;
         
             time = resetTime;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D other) 
+    {
+        if(other.gameObject.tag == "WaveTag")
+        {
+            // Debug.Log("Destroyed");
+        
+            Destroy(gameObject);
+
+            // Debug.Log(effect);
+
+            Instantiate(effect, gameObject.transform.position, Quaternion.identity);
         }
     }
 }
