@@ -40,7 +40,8 @@ public class WaveScript : MonoBehaviour
 
         // x = rend.flipX ? -x : x;
 
-        transform.position = player.transform.position + new Vector3(x, 0f, 0f);
+        if(player != null)
+            transform.position = player.transform.position + new Vector3(x, 0f, 0f);
     }
 
     // void OnCollisionEnter2D(Collision2D other) 
