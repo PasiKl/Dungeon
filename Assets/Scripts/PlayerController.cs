@@ -109,12 +109,18 @@ public class PlayerController : MonoBehaviour
 
     void Flip(float h)
     {
-        if(h < 0.002f)
+        if (h < -0.002f)
+        {
             flip = true;
-        else if(h > 0.002f)
+
+            rend.flipX = flip;
+        }
+        else if (h > 0.002f)
+        {
             flip = false;
 
-        rend.flipX = flip;
+            rend.flipX = flip;
+        }
     }
 
     public bool GetFlip()
