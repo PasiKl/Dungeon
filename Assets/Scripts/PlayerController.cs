@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerController : MonoBehaviour
 {
     float speed, h, v;
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour
     string state;
 
     [SerializeField] GameObject attackSprite;
+    [SerializeField] GameObject killedSprite;
 
     Animator anim;
     Rigidbody2D rb;
@@ -47,7 +49,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         bool move;
-        // float x, y;
 
         move = CheckInput();
 
@@ -72,16 +73,17 @@ public class PlayerController : MonoBehaviour
                 }
 
                 break;
-
-            case "attack":
-
-                break;
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other) 
+    void OnCollisionEnter2D(Collision2D other) 
     {
-        Debug.Log("hit");
+        if(other.gameObject.tag == "Enemy")
+        {
+            Instantiate(killedSprite, gameObject.transform.position, Quaternion.identity);
+        
+            Destroy(gameObject);
+        }
     }
 
     bool CheckInput()
@@ -89,11 +91,8 @@ public class PlayerController : MonoBehaviour
         h = Input.GetAxis("Horizontal");        
         v = Input.GetAxis("Vertical");
 
-        // if(Input.GetKeyDown(KeyCode.Space))
-        if(Input.GetButtonDown("Fire1"))
+        if(Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space))
             Instantiate(attackSprite);
-            // Debug.Log("attack");
-            // state = "attack";
 
         if(h != 0)
         {
