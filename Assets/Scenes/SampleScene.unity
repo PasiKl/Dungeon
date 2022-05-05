@@ -21767,6 +21767,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a110081da6a0e5a44a0e074fd904e59b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  facingLeft: 1
   killedSprite: {fileID: 6202484571763851565, guid: d86e744684c4a524385a715ef8b69b2c, type: 3}
 --- !u!114 &2075596173
 MonoBehaviour:
