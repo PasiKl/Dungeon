@@ -80,6 +80,8 @@ public class PlayerController : MonoBehaviour
     {
         if(other.gameObject.tag == "Enemy")
         {
+            OrcController.SetAlarm(false);
+            
             Instantiate(killedSprite, gameObject.transform.position, Quaternion.identity);
         
             Destroy(gameObject);
