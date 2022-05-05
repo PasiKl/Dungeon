@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     float speed, h, v;
 
     bool flip;
+    bool invisible;
 
     string state;
 
@@ -25,6 +26,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         speed = 6.0f;
+
+        invisible = false;
 
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -78,13 +81,31 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other) 
     {
-        if(other.gameObject.tag == "Enemy")
+        //        if(other.gameObject.tag == "Enemy")
+        switch(other.gameObject.tag)
         {
-            OrcController.SetAlarm(false);
+            case "Enemy":
+                OrcController.SetAlarm(false);
             
-            Instantiate(killedSprite, gameObject.transform.position, Quaternion.identity);
+                Instantiate(killedSprite, gameObject.transform.position, Quaternion.identity);
         
-            Destroy(gameObject);
+                Destroy(gameObject);
+
+                break;
+
+            case "Potion":
+                Destroy(other.gameObject);
+
+                ToggleInvisibility(true);
+
+                break;
+
+            case "Money":
+                Destroy(other.gameObject);
+
+                ToggleInvisibility(false);
+
+                break;
         }
     }
 
@@ -93,8 +114,12 @@ public class PlayerController : MonoBehaviour
         h = Input.GetAxis("Horizontal");        
         v = Input.GetAxis("Vertical");
 
-        if(Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space))
+        {
             Instantiate(attackSprite);
+
+            ToggleInvisibility(false);
+        }
 
         if(h != 0)
         {
@@ -128,6 +153,20 @@ public class PlayerController : MonoBehaviour
     public bool GetFlip()
     {
         return flip;
+    }
+
+    void ToggleInvisibility(bool inv)
+    {
+        invisible = inv;
+
+        Color tmp = rend.color;
+
+        if (invisible)
+            tmp.a = 0.25f;
+        else
+            tmp.a = 1.0f;
+
+        rend.color = tmp;
     }
 }
 
