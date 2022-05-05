@@ -11,7 +11,9 @@ public class OrcController : MonoBehaviour
 
     GameObject player;
 
-    Transform target;
+    [SerializeField] GameObject killedSprite;
+   
+    // Transform target;
 
     AIDestinationSetter setter;
     Animator anim;
@@ -29,7 +31,6 @@ public class OrcController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         setter = GetComponent<AIDestinationSetter>();
         
-        // target
         setter.target = null;        
          
         state = "idle";
@@ -54,7 +55,8 @@ public class OrcController : MonoBehaviour
                 {
                     anim.Play("OrcWalk");
 
-                    setter.target = player.transform;
+                    if(player != null)
+                        setter.target = player.transform;
 
                     state = "walk";
                 }
@@ -79,16 +81,29 @@ public class OrcController : MonoBehaviour
 
     void Flip()
     {
-        Vector2 facing = player.transform.position - transform.position;
+        if(player != null)
+        {
+            Vector2 facing = player.transform.position - transform.position;
 
-        if(Mathf.Sign(facing.x) < 0)
-            rend.flipX = true;
-        else if(Mathf.Sign(facing.x) > 0)
-            rend.flipX = false;
+            if(Mathf.Sign(facing.x) < 0)
+                rend.flipX = true;
+            else if(Mathf.Sign(facing.x) > 0)
+                rend.flipX = false;
+        }
     }
 
     public static void SetAlarm(bool a)
     {
         alarm = a;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) 
+    {
+        if(other.gameObject.tag == "WaveTag")
+        {
+            Instantiate(killedSprite, gameObject.transform.position, Quaternion.identity);
+
+            Destroy(gameObject);
+        }
     }
 }
