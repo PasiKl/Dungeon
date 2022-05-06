@@ -18,6 +18,8 @@ public class MoveBat : MonoBehaviour
 
     AIDestinationSetter setter;
 
+    PlayerController playerScript;
+
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +37,8 @@ public class MoveBat : MonoBehaviour
         setter.target = dest.transform;
 
         player = GameObject.Find("Player");
+
+        playerScript = player.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -43,8 +47,16 @@ public class MoveBat : MonoBehaviour
         time -= Time.deltaTime;
 
         if(player != null && Vector3.Distance(transform.position, player.transform.position) < 4.0f)
-            setter.target = player.transform;
-        else if(time < 0.0f)
+        {
+            if(!playerScript.IsInvisibile())
+            {   
+                setter.target = player.transform;
+
+                return;
+            }
+        }
+            // else if(time < 0.0f)
+        if(time < 0.0f)
         {
             float x = Random.value;
             x = Random.value < 0.5f ? x : -x;

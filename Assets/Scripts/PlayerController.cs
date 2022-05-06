@@ -155,6 +155,11 @@ public class PlayerController : MonoBehaviour
         return flip;
     }
 
+    public bool IsInvisibile()
+    {
+        return invisible;
+    }
+
     void ToggleInvisibility(bool inv)
     {
         invisible = inv;
