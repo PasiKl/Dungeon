@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -36,6 +36,8 @@ public class PlayerController : MonoBehaviour
         anim.Play("PlayerIdle");
 
         state = "idle";
+                
+        StartCoroutine(WaitAMoment());
     }
 
     void FixedUpdate() 
@@ -90,6 +92,9 @@ public class PlayerController : MonoBehaviour
                 Instantiate(killedSprite, gameObject.transform.position, Quaternion.identity);
         
                 Destroy(gameObject);
+
+
+                SceneManager.LoadScene("Title");    
 
                 break;
 
@@ -172,6 +177,11 @@ public class PlayerController : MonoBehaviour
             tmp.a = 1.0f;
 
         rend.color = tmp;
+    }
+
+    IEnumerator WaitAMoment()
+    {
+        yield return new WaitForSeconds(3);
     }
 }
 

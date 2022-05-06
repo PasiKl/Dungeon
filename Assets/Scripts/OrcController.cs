@@ -32,6 +32,11 @@ public class OrcController : MonoBehaviour
     PlayerController playerScript;
 
 
+    private void Awake() 
+    {
+        alarm = false;    
+    }
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -255,4 +260,6 @@ public class OrcController : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+
 }
